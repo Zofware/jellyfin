@@ -199,6 +199,7 @@
  - [allesmi](https://github.com/allesmi)
  - [ThunderClapLP](https://github.com/ThunderClapLP)
  - [Shoham Peller](https://github.com/spellr)
+ - [Tharun Prabhu](https://github.com/tharunprabhu)
 
 # Emby Contributors
 
