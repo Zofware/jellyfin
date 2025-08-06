@@ -10,7 +10,7 @@ namespace Jellyfin.Api.Controllers;
 /// (Auto) play controller.
 /// </summary>
 [Route("")]
-public class PlayController : BaseJellyfinApiController
+public class AutoPlayController : BaseJellyfinApiController
 {
     /// <summary>
     /// Auto play an item.
