@@ -201,6 +201,7 @@ public class MediaInfoHelper
             AllowAudioStreamCopy = allowAudioStreamCopy,
             AllowVideoStreamCopy = allowVideoStreamCopy,
             AlwaysBurnInSubtitleWhenTranscoding = alwaysBurnInSubtitleWhenTranscoding,
+            ForceDirectPlay = mediaSource.ForceDirectPlay,
         };
 
         if (string.Equals(mediaSourceId, mediaSource.Id, StringComparison.OrdinalIgnoreCase))

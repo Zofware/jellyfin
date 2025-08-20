@@ -147,6 +147,7 @@ namespace Jellyfin.LiveTv.TunerHosts
 
             var supportsDirectPlay = !info.EnableStreamLooping && info.TunerCount == 0;
             var supportsDirectStream = !info.EnableStreamLooping;
+            var forceDirectPlay = info.ForceDirectPlay && supportsDirectPlay;
 
             var protocol = _mediaSourceManager.GetPathProtocol(path);
 
@@ -197,6 +198,7 @@ namespace Jellyfin.LiveTv.TunerHosts
                 IsRemote = isRemote,
 
                 IgnoreDts = info.IgnoreDts,
+                ForceDirectPlay = forceDirectPlay,
                 SupportsDirectPlay = supportsDirectPlay,
                 SupportsDirectStream = supportsDirectStream,
 

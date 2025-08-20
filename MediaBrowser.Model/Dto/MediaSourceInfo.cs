@@ -69,6 +69,8 @@ namespace MediaBrowser.Model.Dto
 
         public bool SupportsDirectPlay { get; set; }
 
+        public bool ForceDirectPlay { get; set; }
+
         public bool IsInfiniteStream { get; set; }
 
         [DefaultValue(false)]
