@@ -13,7 +13,7 @@ namespace Jellyfin.Api.Controllers;
 public class AutoPlayController : BaseJellyfinApiController
 {
     /// <summary>
-    /// Auto play an item.
+    /// Open the details page for an item and optionally start playing it.
     /// </summary>
     /// <param name="itemId">The item id.</param>
     /// <param name="shortItemId">Short id of the item.</param>
@@ -25,30 +25,39 @@ public class AutoPlayController : BaseJellyfinApiController
     /// A <see cref="Task" /> that represents the asynchronous operation to play the item.
     /// The task result contains an <see cref="NoContentResult"/>.
     /// </returns>
-    [HttpGet("Play")]
+    [HttpGet("d")]
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public Task<ActionResult> PlayItem(
         [FromQuery(Name = "id")] Guid? itemId,
         [FromQuery(Name = "sid")] string? shortItemId,
         [FromQuery(Name = "tag")] string? tag,
-        [FromQuery(Name = "ts")] float? startPositionSeconds = 0.0f)
+        [FromQuery(Name = "ts")] float? startPositionSeconds)
     {
+        string redirectUri = "/web/#/details?";
+
         if (itemId.HasValue)
         {
-            return Task.FromResult<ActionResult>(Redirect($"/web/#/details?id={itemId}&ts={startPositionSeconds}"));
+            redirectUri += $"id={itemId}";
         }
         else if (shortItemId != null)
         {
-            return Task.FromResult<ActionResult>(Redirect($"/web/#/details?sid={shortItemId}&ts={startPositionSeconds}"));
+            redirectUri += $"sid={shortItemId}";
         }
         else if (tag != null)
         {
-            return Task.FromResult<ActionResult>(Redirect($"/web/#/details?tag={tag}&ts={startPositionSeconds}"));
+            redirectUri += $"tag={tag}";
         }
         else
         {
             return Task.FromResult<ActionResult>(BadRequest());
         }
+
+        if (startPositionSeconds.HasValue)
+        {
+            redirectUri += $"&ts={startPositionSeconds}";
+        }
+
+        return Task.FromResult<ActionResult>(Redirect(redirectUri));
     }
 }
