@@ -98,7 +98,7 @@ public sealed class SetupServer : IDisposable
                         var maxLevel = logEntry.LogLevel;
                         var stack = new Stack<StartupLogTopic>(children);
 
-                        while (maxLevel != LogLevel.Error && stack.Count > 0 && (logEntry = stack.Pop()) != null) // error is the highest inherted error level.
+                        while (maxLevel != LogLevel.Error && stack.Count > 0 && (logEntry = stack.Pop()) is not null) // error is the highest inherted error level.
                         {
                             maxLevel = maxLevel < logEntry.LogLevel ? logEntry.LogLevel : maxLevel;
                             foreach (var child in logEntry.Children)
@@ -250,6 +250,7 @@ public sealed class SetupServer : IDisposable
                                                 { "isInReportingMode", _isUnhealthy },
                                                 { "retryValue", retryAfterValue },
                                                 { "logs", startupLogEntries },
+                                                { "networkManagerReady", networkManager is not null },
                                                 { "localNetworkRequest", networkManager is not null && context.Connection.RemoteIpAddress is not null && networkManager.IsInLocalNetwork(context.Connection.RemoteIpAddress) }
                                             },
                                             new ByteCounterStream(context.Response.BodyWriter.AsStream(), IODefaults.FileStreamBufferSize, true, _startupUiRenderer.ParserOptions))
