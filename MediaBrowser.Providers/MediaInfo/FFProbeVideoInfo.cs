@@ -524,7 +524,7 @@ namespace MediaBrowser.Providers.MediaInfo
                         {
                             Name = person.Name,
                             Type = person.Type,
-                            Role = person.Role.Trim()
+                            Role = person.Role?.Trim()
                         });
                     }
                 }
