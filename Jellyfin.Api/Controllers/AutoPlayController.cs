@@ -60,4 +60,46 @@ public class AutoPlayController : BaseJellyfinApiController
 
         return Task.FromResult<ActionResult>(Redirect(redirectUri));
     }
+
+    /// <summary>
+    /// Open the list page for a folder.
+    /// </summary>
+    /// <param name="parentId">The item id.</param>
+    /// <param name="shortItemId">Short id of the item.</param>
+    /// <param name="tag">Unique tag identifying the item.</param>
+    /// <returns>
+    /// <response code="302">Redirected to play page.</response>
+    /// <response code="400">Bad request.</response>
+    /// A <see cref="Task" /> that represents the asynchronous operation to play the item.
+    /// The task result contains an <see cref="NoContentResult"/>.
+    /// </returns>
+    [HttpGet("l")]
+    [ProducesResponseType(StatusCodes.Status302Found)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public Task<ActionResult> OpenFolder(
+        [FromQuery(Name = "id")] Guid? parentId,
+        [FromQuery(Name = "sid")] string? shortItemId,
+        [FromQuery(Name = "tag")] string? tag)
+    {
+        string redirectUri = "/web/#/list?";
+
+        if (parentId.HasValue)
+        {
+            redirectUri += $"parentId={parentId}";
+        }
+        else if (shortItemId != null)
+        {
+            redirectUri += $"sid={shortItemId}";
+        }
+        else if (tag != null)
+        {
+            redirectUri += $"tag={tag}";
+        }
+        else
+        {
+            return Task.FromResult<ActionResult>(BadRequest());
+        }
+
+        return Task.FromResult<ActionResult>(Redirect(redirectUri));
+    }
 }
