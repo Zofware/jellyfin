@@ -209,6 +209,7 @@
  - [TokerX](https://github.com/TokerX)
  - [GeneMarks](https://github.com/GeneMarks)
  - [martenumberto](https://github.com/martenumberto)
+ - [MarcoCoreDuo](https://github.com/MarcoCoreDuo)
 
 # Emby Contributors
 
