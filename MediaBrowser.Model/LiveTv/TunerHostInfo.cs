@@ -46,5 +46,7 @@ namespace MediaBrowser.Model.LiveTv
         public bool IgnoreDts { get; set; }
 
         public bool ReadAtNativeFramerate { get; set; }
+
+        public bool ForceDirectPlay { get; set; }
     }
 }
